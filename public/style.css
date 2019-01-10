@@ -1,0 +1,51 @@
+.controles{
+	width: 200px;
+}
+
+#haut{
+	-webkit-transform: scaleY(-1);
+ 	transform: scaleY(-1);
+
+}
+
+#bas{
+
+}
+
+#gauche{
+	-webkit-transform: scaleX(-1);
+ 	transform: scaleX(-1);
+
+}
+
+#droite{
+
+}
+
+#zoom{
+
+
+}
+
+#dezoom{
+
+
+}
+
+#telecommande{
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: center;
+	width: 800px;
+	margin-left: auto;
+  	margin-right: auto;
+  	align-items: center;
+}
+
+.container{
+	flex-flow: row nowrap;
+}
+
+#telecommande > * {
+
+}
