@@ -6,12 +6,18 @@
         <link rel="stylesheet" href="style.css">
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-        <script type="text/javascript" src="client.js"></script>
+        <script type="text/javascript" src="guest.js"></script>
     </head>
  
     <body>
         <h1>C'est la télécommande !</h1>
 
+        <form class="login">
+        <span>Quel est le mot de passe ?</span>
+        <input type="text" placeholder="Entrez le mot de passe"/>
+        <input type="submit" value="➡" />
+        </form>
+        
         <div id="telecommande">
             <img src="arrows-pointing-down.svg" class="controles" id="haut" >
             <div class="container">
