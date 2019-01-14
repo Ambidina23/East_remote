@@ -1,0 +1,114 @@
+.controles{
+	width: 200px;
+}
+
+#haut{
+	-webkit-transform: scaleY(-1);
+ 	transform: scaleY(-1);
+
+}
+
+#bas{
+
+}
+
+#gauche{
+	-webkit-transform: scaleX(-1);
+ 	transform: scaleX(-1);
+
+}
+
+#droite{
+
+}
+
+#zoom{
+
+
+}
+
+#dezoom{
+
+
+}
+
+#telecommande{
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: center;
+	width: 800px;
+	margin-left: auto;
+  	margin-right: auto;
+  	align-items: center;
+}
+
+.container{
+	flex-flow: row nowrap;
+}
+
+#telecommande > * {
+
+}
+
+/* -- Form styles -- */
+
+
+form.login {
+	position: fixed;
+	top: 50%;
+	max-height: 140px;
+	max-width: 390px;
+	width: 100%;
+	left: 50%;
+	margin: -70px 0 0 -195px;
+	text-align: center;
+	z-index: 2;
+	height: 100%;
+	background-color: #fff;
+	border-radius: 5px;
+	padding: 60px 0 0;
+}
+
+form.login input[type=text] {
+	position: relative;
+	left: -5px;
+	width: 160px;
+	height: 29px;
+	padding: 0 10px;
+	font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+	background-color: rgba(255,255,255, 0.8);
+	border: 1px solid #C5C5C5;
+	border-radius: 2px;
+	margin-top: 26px;
+}
+
+form.login span {
+	font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+form.login input[type=text]::-webkit-input-placeholder {
+	color: #ABABAB;
+}
+
+form.login input[type=submit] {
+	position: relative;
+	left: 5px;
+	height: 29px;
+	width: 40px;
+	line-height: 29px;
+	text-align: center;
+	padding: 0 10px;
+	font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	border: none;
+	border-radius: 2px;
+	background-color: rgba(90, 147, 187, 0.69);
+	color: #fff;
+}
+
+#content{
+	height: 100%;
+	width: 100%;
+}
