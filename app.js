@@ -5,8 +5,25 @@ var io = require('socket.io').listen(server);
 var robot = require("robotjs");
 var clientIp;
 var mdp='';
+const bodyParser = require('body-parser');
+const path = require("path");
+const fs = require("fs");
+const multer = require("multer");
 
-// Chargement de la page index.html
+const handleError = (err, res) => {
+  res
+    .status(500)
+    .contentType("text/plain")
+    .end("Oh, il y a un soucis :(");
+};
+
+// Definition du répertoire utilisé par Multer
+const upload = multer({
+  dest: "/upload"
+});
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
 // Chargement de la page index.html
 app.get('/', function (req, res) {
 
@@ -20,6 +37,35 @@ app.get('/', function (req, res) {
   
 });
 
+app.get("/presentation", function(req, res){
+  res.sendFile(path.join(__dirname, "./upload/presentation.html"));
+});
+
+app.post("/upload",upload.single("file" /* name attribute of <file> element in your form */),(req, res) => {
+    
+    const tempPath = req.file.path;
+    const targetPath = path.join(__dirname, "./upload/presentation.html");
+
+    if (path.extname(req.file.originalname).toLowerCase() === ".html") {
+      fs.rename(tempPath, targetPath, err => {
+        if (err) return handleError(err, res);
+        mdp=req.body.mdp;
+        console.log('setMdp : '+mdp);
+        res.redirect('/presentation');
+      });
+    } else {
+      fs.unlink(tempPath, err => {
+        if (err) return handleError(err, res);
+
+        res
+          .status(403)
+          .contentType("text/plain")
+          .end("Seul les fichiers .html sont acceptés");
+      });
+    }
+  }
+);
+
 io.sockets.on('connection', function (socket) {
     // Récupérer l'adresse ip
     var socketId = socket.id;
@@ -27,39 +73,56 @@ io.sockets.on('connection', function (socket) {
 
     console.log(clientIp);
 
+    // Quand le serveur recoit le message précédent, on simule le clic gauche
+    socket.on('clic',function(data){
+        if(data.key === mdp) {
+            robot.mouseClick();
+        }       
+    })
+
     // Quand le serveur recoit le message précédent, on simule la touche gauche
-	socket.on('precedent',function(){
+	socket.on('precedent',function(data){
         robot.keyTap("left");       
     })
 
     // Quand le serveur recoit le message suivant, on simule la touche droite
-    socket.on('suivant',function(){
-        robot.keyTap("right");  
+    socket.on('suivant',function(data){
+        if(data.key === mdp) {
+            robot.keyTap("right");  
+        }
     })
 
     // Quand le serveur recoit le message debut, on simule la touche home
-    socket.on('debut',function(){
-        robot.keyTap("home");
+    socket.on('debut',function(data){
+        if(data.key === mdp) {
+            robot.keyTap("home");
+        }
     })
 
     // Quand le serveur recoit le message fin, on simule la touche end
-    socket.on('fin',function(){
-        robot.keyTap("end");
+    socket.on('fin',function(data){
+        if(data.key === mdp) {
+            robot.keyTap("end");
+        }
     })
 
     // Quand le serveur recoit le message zoom, on simule la combinaison de touche ctrl et +
-    socket.on('zoom',function(){
-        robot.keyToggle("control", 'down');
-        robot.keyTap("+");
-        robot.keyToggle("control", "up");
+    socket.on('zoom',function(data){
+        if(data.key === mdp) {
+            robot.keyToggle("control", 'down');
+            robot.keyTap("+");
+            robot.keyToggle("control", "up");
+        }
         
     })
 
     // Quand le serveur recoit le message dezoom, on simule la combinaison de touche ctrl et -
-    socket.on('dezoom',function(){
-        robot.keyToggle("control", 'down');
-        robot.keyTap("-");
-        robot.keyToggle("control", "up");
+    socket.on('dezoom',function(data){
+        if(data.key === mdp) {
+            robot.keyToggle("control", 'down');
+            robot.keyTap("-");
+            robot.keyToggle("control", "up");
+        }
         
     })
 
@@ -69,15 +132,15 @@ io.sockets.on('connection', function (socket) {
         socket.emit('access', {
             access: (data.key === mdp ? "granted" : "denied")
         });
-
+        console.log('checkMdp : '+data.key+" ?");
     });
 
 	// Quand le serveur recoit le message setMdp
-    socket.on('setMdp', function(data){
+    /*socket.on('setMdp', function(data){
     	// On définie le mot de passe
         mdp=data.key;
-
-    });
+        console.log('setMdp : '+mdp);
+    });*/
 
 });
 

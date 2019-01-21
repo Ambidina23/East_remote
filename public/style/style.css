@@ -1,5 +1,5 @@
 .controles{
-	width: 200px;
+	width: 100px;
 }
 
 #haut{
@@ -36,7 +36,7 @@
 	display: flex;
 	flex-flow: column wrap;
 	justify-content: center;
-	width: 800px;
+
 	margin-left: auto;
   	margin-right: auto;
   	align-items: center;
@@ -106,9 +106,4 @@ form.login input[type=submit] {
 	border-radius: 2px;
 	background-color: rgba(90, 147, 187, 0.69);
 	color: #fff;
-}
-
-#content{
-	height: 100%;
-	width: 100%;
 }

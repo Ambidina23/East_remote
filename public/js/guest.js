@@ -1,30 +1,49 @@
 $(function (){
     // Connexion à socket.io
     var socket = io.connect();
- 
+    var key = "";
+    
+    // Lorsqu'on clique sur l'image
+    $("#clic").click(function(){
+        socket.emit('clic',{ // Transmet le message ainsi que le mot de passe
+            key: key
+        }); 
+    });
     // Lorsqu'on clique sur l'image
     $("#droite").click(function(){
-        socket.emit('suivant'); // Transmet le message 
+        socket.emit('suivant',{ // Transmet le message ainsi que le mot de passe
+            key: key
+        }); 
     });
     // Lorsqu'on clique sur l'image
     $("#gauche").click(function(){
-        socket.emit('precedent'); // Transmet le message
+        socket.emit('precedent',{ // Transmet le message ainsi que le mot de passe
+            key: key
+        }); 
     });
     // Lorsqu'on clique sur l'image
     $("#haut").click(function(){
-        socket.emit('debut'); // Transmet le message
+        socket.emit('debut',{ // Transmet le message ainsi que le mot de passe
+            key: key
+        }); 
     });
     // Lorsqu'on clique sur l'image
     $("#bas").click(function(){
-        socket.emit('fin'); // Transmet le message
+        socket.emit('fin',{ // Transmet le message ainsi que le mot de passe
+            key: key
+        }); 
     });
     // Lorsqu'on clique sur l'image
     $("#zoom").click(function(){
-        socket.emit('zoom'); // Transmet le message
+        socket.emit('zoom',{ // Transmet le message ainsi que le mot de passe
+            key: key
+        }); 
     });
     // Lorsqu'on clique sur l'image
     $("#dezoom").click(function(){
-        socket.emit('dezoom'); // Transmet le message
+        socket.emit('dezoom',{ // Transmet le message ainsi que le mot de passe
+            key: key
+        }); 
     });
 
     var form = $('form.login'),
@@ -55,8 +74,6 @@ $(function (){
         if(data.access === "granted") {
             form.hide();
         }
-        else {            
-            location.reload();
-        }
+        
     });
 });

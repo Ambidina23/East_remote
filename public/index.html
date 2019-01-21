@@ -12,9 +12,11 @@
     <body>
         <h1>East Control Remote</h1>
 
-        <form class="login">
+        <form class="login" method="post" enctype="multipart/form-data" action="/upload">
+        <span>Définnisez le fichier</span>
+        <input type="file" placeholder="Entrez le mot de passe" name="file"/>
         <span>Définnisez le mot de passe</span>
-        <input type="text" placeholder="Entrez le mot de passe"/>
+        <input type="text" placeholder="Entrez le mot de passe" name="mdp"/>
         <input type="submit" value="➡" />
         </form>
 
