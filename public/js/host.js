@@ -3,7 +3,7 @@ $(function (){
     var socket = io.connect();
 
     var form = $('form.login'),
-        secretTextBox = form.find('input[type=text]'),
+        secretTextBox = form.find('input[type=password]'),
         //file = form.find('input[id=fileURL]');
     var key = "";
     //var url = "";
