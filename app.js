@@ -19,7 +19,11 @@ const handleError = (err, res) => {
 
 // Definition du répertoire utilisé par Multer
 const upload = multer({
+<<<<<<< HEAD
   dest: __dirname + '/upload'
+=======
+  dest: __dirname +'/upload'
+>>>>>>> dbc6c2d8a2d1d5edfc3e906a3148471cedde3a58
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));

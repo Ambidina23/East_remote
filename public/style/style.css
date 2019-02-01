@@ -69,7 +69,7 @@ form.login {
 	padding: 60px 0 0;
 }
 
-form.login input[type=text] {
+form.login input[type=password], input[type=file]{
 	position: relative;
 	left: -5px;
 	width: 160px;
@@ -88,7 +88,7 @@ form.login span {
 	font-size: 18px;
 }
 
-form.login input[type=text]::-webkit-input-placeholder {
+form.login input[type=password]::-webkit-input-placeholder {
 	color: #ABABAB;
 }
 

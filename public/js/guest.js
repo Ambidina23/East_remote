@@ -47,7 +47,7 @@ $(function (){
     });
 
     var form = $('form.login'),
-        secretTextBox = form.find('input[type=text]');
+        secretTextBox = form.find('input[type=password]');
     var key = "";
 
     // Quand le formulaire est envoyé
