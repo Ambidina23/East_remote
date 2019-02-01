@@ -19,7 +19,7 @@ const handleError = (err, res) => {
 
 // Definition du répertoire utilisé par Multer
 const upload = multer({
-  dest: "/upload"
+  dest: __dirname + '/upload'
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -109,9 +109,16 @@ io.sockets.on('connection', function (socket) {
     // Quand le serveur recoit le message zoom, on simule la combinaison de touche ctrl et +
     socket.on('zoom',function(data){
         if(data.key === mdp) {
-            robot.keyToggle("control", 'down');
-            robot.keyTap("+");
-            robot.keyToggle("control", "up");
+            if(process.platform == "darwin") {
+                robot.keyTap('+', 'command');
+                //robot.keyToggle("command", 'down');
+                //robot.keyTap("+");
+                //robot.keyToggle("command", "up");
+            }else{
+                robot.keyToggle("control", 'down');
+                robot.keyTap("+");
+                robot.keyToggle("control", "up");
+            }
         }
         
     })
@@ -119,9 +126,16 @@ io.sockets.on('connection', function (socket) {
     // Quand le serveur recoit le message dezoom, on simule la combinaison de touche ctrl et -
     socket.on('dezoom',function(data){
         if(data.key === mdp) {
-            robot.keyToggle("control", 'down');
-            robot.keyTap("-");
-            robot.keyToggle("control", "up");
+            if(process.platform == "darwin") {
+                robot.keyTap('-', 'command');
+                //robot.keyToggle("command", 'down');
+                //robot.keyTap("-");
+                //robot.keyToggle("command", "up");
+            }else{
+                robot.keyToggle("control", 'down');
+                robot.keyTap("-");
+                robot.keyToggle("control", "up");
+            }
         }
         
     })
