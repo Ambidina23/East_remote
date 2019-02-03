@@ -33,6 +33,7 @@
 }
 
 #telecommande{
+	display: block;
 	display: flex;
 	flex-flow: column wrap;
 	justify-content: center;
@@ -48,6 +49,30 @@
 
 #telecommande > * {
 
+}
+
+#mode_souris{
+	display:none;
+    border-width:3px;  
+    border-style:dashed;
+  	width: 100%;
+  	height: 200px;
+    margin-top: 15vh;
+}
+
+#mode{
+	height: 29px;
+	line-height: 29px;
+	text-align: center;
+	padding: 0 10px;
+	font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	border: none;
+	border-radius: 2px;
+	background-color: rgba(90, 147, 187, 0.69);
+	color: #fff;
+  	margin:auto;
+  	display:block;
 }
 
 /* -- Form styles -- */

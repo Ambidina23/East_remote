@@ -22,6 +22,17 @@ const upload = multer({
   dest: __dirname + '/upload'
 });
 
+var screenWidth = 1440;
+var screenHeight = 900;
+var adjustment = screenHeight/200;
+// Récuperer la résolution de l'hote
+try {
+    screenWidth = robot.getScreenSize().width;
+    screenHeight = robot.getScreenSize().height;
+} catch (e) {
+    console.log(e);
+}
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Chargement de la page index.html
@@ -111,9 +122,6 @@ io.sockets.on('connection', function (socket) {
         if(data.key === mdp) {
             if(process.platform == "darwin") {
                 robot.keyTap('+', 'command');
-                //robot.keyToggle("command", 'down');
-                //robot.keyTap("+");
-                //robot.keyToggle("command", "up");
             }else{
                 robot.keyToggle("control", 'down');
                 robot.keyTap("+");
@@ -128,14 +136,24 @@ io.sockets.on('connection', function (socket) {
         if(data.key === mdp) {
             if(process.platform == "darwin") {
                 robot.keyTap('-', 'command');
-                //robot.keyToggle("command", 'down');
-                //robot.keyTap("-");
-                //robot.keyToggle("command", "up");
             }else{
                 robot.keyToggle("control", 'down');
                 robot.keyTap("-");
                 robot.keyToggle("control", "up");
             }
+        }
+        
+    })
+
+
+    // Quand le serveur recoit le message souris, on simule le mouvement du curseur
+    socket.on('souris',function(data){
+        if(data.key === mdp) {
+
+            var x = data.x;
+            var y = data.y;
+
+            robot.moveMouse(adjustment * x, adjustment * y);
         }
         
     })
@@ -149,16 +167,12 @@ io.sockets.on('connection', function (socket) {
         console.log('checkMdp : '+data.key+" ?");
     });
 
-	// Quand le serveur recoit le message setMdp
-    /*socket.on('setMdp', function(data){
-    	// On définie le mot de passe
-        mdp=data.key;
-        console.log('setMdp : '+mdp);
-    });*/
+
 
 });
 
 //Chemin pour servir les fichiers statiques
+app.use(express.static('upload'));
 app.use(express.static('public'));
 
 server.listen(8080,clientIp);
