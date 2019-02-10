@@ -1,3 +1,5 @@
+/* -- Télécommande -- */
+
 .controles{
 	width: 100px;
 }
@@ -56,7 +58,7 @@
     border-width:3px;  
     border-style:dashed;
   	width: 100%;
-  	height: 450px;
+  	height: 250px;
     margin-top: 0vh;
 }
 
@@ -75,23 +77,20 @@
   	display:block;
 }
 
-/* -- Form styles -- */
+/* -- Formulaire -- */
 
 
 form.login {
 	position: fixed;
-	top: 50%;
+	top: 20%;
 	max-height: 140px;
-	max-width: 390px;
-	width: 100%;
-	left: 50%;
-	margin: -70px 0 0 -195px;
+	width: 100%; 
 	text-align: center;
 	z-index: 2;
 	height: 100%;
 	background-color: #fff;
 	border-radius: 5px;
-	padding: 60px 0 0;
+	padding: 60px 0px 0;
 }
 
 form.login input[type=password], input[type=file]{
@@ -131,4 +130,43 @@ form.login input[type=submit] {
 	border-radius: 2px;
 	background-color: rgba(90, 147, 187, 0.69);
 	color: #fff;
+}
+
+form.login input[type=radio] {
+    display: none;
+}
+
+input:checked+label {
+	background-color: rgba(90, 147, 187, 0.69);
+}
+
+label{
+	font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+	flex: 1 1 auto;
+	padding: 10px;
+	max-width: 250px;
+}
+
+label:hover{
+  	border-radius: 2px;
+	background-color: rgba(114, 116, 140, 0.3);
+	transition: 500ms; 
+}
+
+#presentations{
+	height: 200px;
+	margin-top: 26px;	
+	display: flex;
+    flex-flow: row wrap;
+    overflow-y: auto;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+
+#aide{
+   position:absolute;
+   top:20px;
+   right:20px;
+   height: 30px;
 }

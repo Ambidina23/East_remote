@@ -1,81 +1,81 @@
+// Modules
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 var robot = require("robotjs");
+var bodyParser = require('body-parser');
+var path = require("path");
+var fs = require("fs");
+
+// Variables
 var clientIp;
 var mdp='';
-const bodyParser = require('body-parser');
-const path = require("path");
-const fs = require("fs");
-const multer = require("multer");
-
-const handleError = (err, res) => {
-  res
-    .status(500)
-    .contentType("text/plain")
-    .end("Oh, il y a un soucis :(");
-};
-
-// Definition du répertoire utilisé par Multer
-const upload = multer({
-  dest: __dirname + '/upload'
-});
-
+var file;
+var liste;
 var screenWidth = 1440;
 var screenHeight = 900;
-var adjustment = screenHeight/200;
-// Récuperer la résolution de l'hote
+var adjustment;
+
+// Permet de lire le JSON renvoyé par un formulaire
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Récuperer la résolution de l'hote afin d'obtenir une valeur d'ajustement pour le mouvement de la souris
 try {
     screenWidth = robot.getScreenSize().width;
     screenHeight = robot.getScreenSize().height;
+    adjustment = screenHeight/200;
 } catch (e) {
     console.log(e);
 }
-
-app.use(bodyParser.urlencoded({ extended: true }));
 
 // Chargement de la page index.html
 app.get('/', function (req, res) {
 
     var ua = req.header('user-agent');
-    // Redirection sur la page contenant la télécommande pour les appreils mobiles
+    // Redirection sur la page contenant la télécommande pour les appareils mobiles
     if(/mobile|iphone|ipod|android|blackberry|opera|mini|windows\sce|palm|smartphone|iemobile|ipad|android|android 3.0|xoom|sch-i800|playbook|tablet|kindle/i.test(ua)) {
         res.sendFile(__dirname + '/public/mobile.html');
-    } else {
+    } else {  // Sinon redirection sur la page contenant l'interface pour la présentation
         res.sendFile(__dirname + '/public/index.html');
+        // On reset le mot de passe afin que la télécommande ne soit plus disponible en cas de chargement d'une nouvelle présentation
+        mdp='';
+        // On appelle la fonction pour lister les dossiers contenu dans le dossier présentations
+        allPresentation();
     }
   
 });
 
 app.get("/presentation", function(req, res){
-  res.sendFile(path.join(__dirname, "./upload/presentation.html"));
+    // On lit le dossier selectionné
+    fs.readdir(path.join(__dirname, "./presentations/"+file), (err, files) => {
+        if (err) return err;
+        // On parcourt les fichiers du dossier afin de trouver le fichier html de la présentation
+        for (var i=0; i<files.length; i++) {
+            if(path.extname(files[i]).toLowerCase() === ".html") {
+                // Chemin pour servir les fichiers statiques de la présentation choisie
+                app.use(express.static('presentations/'+file));
+                // Redirection sur la présenation choisie
+                return res.sendFile(path.join(__dirname, "./presentations/"+file+"/"+files[i]));
+            }
+        }
+        return res
+          .status(500)
+          .contentType("text/plain")
+          .end("Aucun fichier .html n'a été trouvé");     
+    });
+
+    
 });
 
-app.post("/upload",upload.single("file" /* name attribute of <file> element in your form */),(req, res) => {
-    
-    const tempPath = req.file.path;
-    const targetPath = path.join(__dirname, "./upload/presentation.html");
+app.post("/", function(req, res){
+    // On récupére les données du formulaire afin de définir le mot de passe et le dossier de la présentation
+    mdp=req.body.mdp;
+    file=req.body.file;
+    // Puis on redirige vers la présentation
+    res.redirect('/presentation');
+});
 
-    if (path.extname(req.file.originalname).toLowerCase() === ".html") {
-      fs.rename(tempPath, targetPath, err => {
-        if (err) return handleError(err, res);
-        mdp=req.body.mdp;
-        console.log('setMdp : '+mdp);
-        res.redirect('/presentation');
-      });
-    } else {
-      fs.unlink(tempPath, err => {
-        if (err) return handleError(err, res);
-
-        res
-          .status(403)
-          .contentType("text/plain")
-          .end("Seul les fichiers .html sont acceptés");
-      });
-    }
-  }
-);
 
 io.sockets.on('connection', function (socket) {
     // Récupérer l'adresse ip
@@ -84,7 +84,7 @@ io.sockets.on('connection', function (socket) {
 
     console.log(clientIp);
 
-    // Quand le serveur recoit le message précédent, on simule le clic gauche
+    // Quand le serveur recoit le message clic, on simule le clic gauche
     socket.on('clic',function(data){
         if(data.key === mdp) {
             robot.mouseClick();
@@ -92,7 +92,7 @@ io.sockets.on('connection', function (socket) {
     })
 
     // Quand le serveur recoit le message précédent, on simule la touche gauche
-	socket.on('precedent',function(data){
+    socket.on('precedent',function(data){
         robot.keyTap("left");       
     })
 
@@ -120,6 +120,7 @@ io.sockets.on('connection', function (socket) {
     // Quand le serveur recoit le message zoom, on simule la combinaison de touche ctrl et +
     socket.on('zoom',function(data){
         if(data.key === mdp) {
+            // Si l'hote est un Mac on effectue la combinaison command et +
             if(process.platform == "darwin") {
                 robot.keyTap('+', 'command');
             }else{
@@ -134,6 +135,7 @@ io.sockets.on('connection', function (socket) {
     // Quand le serveur recoit le message dezoom, on simule la combinaison de touche ctrl et -
     socket.on('dezoom',function(data){
         if(data.key === mdp) {
+            // Si l'hote est un Mac on effectue la combinaison command et -
             if(process.platform == "darwin") {
                 robot.keyTap('-', 'command');
             }else{
@@ -160,19 +162,31 @@ io.sockets.on('connection', function (socket) {
 
     // Quand le serveur recoit le message checkMdp
     socket.on('checkMdp', function(data){
-    	// On vérifie si le mot de passe entré dans la télécommande correspond afin d'autoriser l'utilisation
+        // On vérifie si le mot de passe entré dans la télécommande correspond afin d'autoriser l'utilisation
         socket.emit('access', {
             access: (data.key === mdp ? "granted" : "denied")
         });
         console.log('checkMdp : '+data.key+" ?");
     });
 
-
-
+    // Quand le serveur recoit le message actualiserPresentations
+    socket.on('actualiserPresentations', function(){
+        // On appelle la fonction pour lister les dossiers contenu dans le dossier présentations
+        allPresentation();
+        // On renvoie un message presentations avec la liste
+        socket.emit('presentations',liste);
+    });
 });
 
+// Fonction permettant à lister les présentations contenues dans le dossier présentations
+function allPresentation() {
+    fs.readdir(path.join(__dirname, "./presentations/"), (err, files) => {
+        if (err) return err;
+        liste=files;
+    });
+}
+
 //Chemin pour servir les fichiers statiques
-app.use(express.static('upload'));
 app.use(express.static('public'));
 
 server.listen(8080,clientIp);

@@ -12,12 +12,15 @@
     <body>
         <h1>East Control Remote</h1>
 
-        <form class="login" method="post" enctype="multipart/form-data" action="/upload">
-        <span>Définnisez le fichier</span>
+        <a target="_blank" href="https://github.com/Ambidina23/East_remote/wiki/Guide-d'utilisation"><img src="style/information.svg" id="aide" ></a>
+
+        <form class="login" method="post" action="/"> 
+        <span>Sélectionnez la présentation</span>
+        <div id="presentations">
+        </div>
         <br>
-        <input type="file" placeholder="" name="file"/>
-        <br><br>
-        <span>Définnisez le mot de passe</span>
+        <span>Définissez le mot de passe</span>
+        <br>
         <input type="password" placeholder="Entrez le mot de passe" name="mdp"/>
         <input type="submit" value="➡" />
         </form>

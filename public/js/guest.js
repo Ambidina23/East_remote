@@ -58,10 +58,6 @@ $(function (){
             y: event.originalEvent.touches[0].pageY
         });
 
-        //var pageCoords = "( " + event.pageX + ", " + event.pageY + " )";
-        //var clientCoords = "( " + event.clientX + ", " + event.clientY + " )";
-        //$( "span:first" ).text( "( event.pageX, event.pageY ) : " + pageCoords );
-        //$( "span:last" ).text( "( event.clientX, event.clientY ) : " + clientCoords );
     });
 
     // Quand le formulaire est envoyé
@@ -93,6 +89,7 @@ $(function (){
 
 });
 
+// Fonction permettant de passer d'un mode à un autre
 function switch_mode() {
         if ($("#mode_souris").css("display") == "none") {
             $("#telecommande").hide();
