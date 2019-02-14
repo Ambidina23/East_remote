@@ -4,6 +4,18 @@ $(function (){
     var key = "";
     
     // Lorsqu'on clique sur l'image
+    $("#plein").click(function(){
+        socket.emit('plein',{ // Transmet le message ainsi que le mot de passe
+            key: key
+        }); 
+    });
+    // Lorsqu'on clique sur l'image
+    $("#nav").click(function(){
+        socket.emit('nav',{ // Transmet le message ainsi que le mot de passe
+            key: key
+        }); 
+    });
+    // Lorsqu'on clique sur l'image
     $("#clic").click(function(){
         socket.emit('clic',{ // Transmet le message ainsi que le mot de passe
             key: key

@@ -91,9 +91,25 @@ io.sockets.on('connection', function (socket) {
         }       
     })
 
+    // Quand le serveur recoit le message plein, on simule la touche F
+    socket.on('plein',function(data){
+        if(data.key === mdp) {
+            robot.keyTap("F");  
+        }     
+    })
+
+    // Quand le serveur recoit le message nav, on simule la touche B
+    socket.on('nav',function(data){
+        if(data.key === mdp) {
+            robot.keyTap("B");  
+        }     
+    })
+
     // Quand le serveur recoit le message précédent, on simule la touche gauche
     socket.on('precedent',function(data){
-        robot.keyTap("left");       
+        if(data.key === mdp) {
+            robot.keyTap("left");  
+        }     
     })
 
     // Quand le serveur recoit le message suivant, on simule la touche droite
