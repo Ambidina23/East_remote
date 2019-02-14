@@ -167,56 +167,6 @@ function bindNavControls(timeContainer, navigation) {
       });
     }
   }
-  
-  // Touch screens
-  
-  if (hasControl("touch")) {
-  
-      var hammertime=new Hammer(slideshow) ;
-      
-      hammertime.get('swipe').set({direction: Hammer.DIRECTION_ALL});
-
-      
-      hammertime.on ( 'swipeleft swiperight swipeup swipedown doubletap', function(ev) {
-        
-//            alert(ev.type) ;
-            
-            var index = timeContainer.currentIndex;     // index of the current slide
-            var count = timeContainer.timeNodes.length; // number of slides
-
-      
-            switch(ev.type){
-               
-               case "swipeleft":
-                
-                timeContainer.selectIndex(index + 1);
-                break;
-              
-               case "swiperight":
-                
-                timeContainer.selectIndex(index - 1);
-                break;
-              
-               case "swipeup":
-                
-                timeContainer.selectIndex(0);
-                break;
-              
-               case "swipedown":
-                timeContainer.selectIndex(count - 1);
-                break;
-              
-               case "doubletap":
-                toogle_buttons_bar ();
-                toggle_slide_size () ;
-                break;
-                
-                
-                
-            }
-            
-      });
-  }
 }
 
 EVENTS.onSMILReady(function() {
@@ -403,7 +353,7 @@ function toggle_session_buttons () {
     
     rec_button.setAttribute("style","display: inline");
     export_button.setAttribute("style","display: inline");
-    import_button.setAttribute("style","display: inline");
+    import_button.setAttribute("style","display: inline")
     
   }
  

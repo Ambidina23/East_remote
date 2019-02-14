@@ -2,7 +2,7 @@
 <timesheet xmlns="http://www.w3.org/ns/SMIL">
 
   <!-- Slideshow Navigation -->
-  <seq timeAction="intrinsic" prev="prev.click" next="next.click" first="first.click" last="last.click" navigation="arrows; scroll; hash">
+  <seq timeAction="intrinsic" prev="prev.click" next="next.click" first="first.click" last="last.click" navigation="arrows; scroll; hash; touch">
     <item select="div.slide">
       <par>
 

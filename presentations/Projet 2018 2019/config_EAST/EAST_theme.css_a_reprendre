@@ -1,0 +1,322 @@
+/* 
+Version 0.1 : Didier Courtaud 13 Février 2013
+
+Fichier Thème de EAST permettant de définir les styles :
+
+- des listes ( couleur de la puce, image de la puce, couleur et police du texte des items )
+- de la page des slides ( couleur ou image de fond, couleur et police du texte )
+- de la page de titre ( couleur ou image de fond, couleur et police du texte )
+- des titres ( couleur ou image de fond, couleur et police du texte  )
+- des environnements d'image ou de vidéo (  couleur ou image de fond de l'environnement , couleur de fond , couleur et police du titre)
+- des entêtes de tableau ( couleur ou image de fond, couleur et police du texte )
+- des éléments de tableau ( couleur ou image de fond, couleur et police du texte )
+
+
+*/
+
+/* -------------------------------------    Listes --------------------------------------------------------------------------*/
+
+
+/* Listes de premier niveau */
+
+div.slide > ul > li:not(.elsommaire) { /* Item de liste */
+    
+	color: green ; /* couleur de la puce */
+        background: inherit ; /* couleur de fond de l'item de liste*/
+	list-style-type: square ; /* type de puce */
+	list-style-image: none ; /* image de la puce*/
+	
+}
+div.slide > ul > li:not(.elsommaire) > span { /* Texte de l'item de liste */
+	
+	color: black ; /* couleur du texte */
+	background: inherit ; /* couleur de fond du texte */
+	font-size: inherit ; /* taille de la police de caractères */
+	font-family: inherit ; /* choix de la police de caractères */
+	font-weight: inherit ; /* choix de la graisse de la police de caractères*/	
+}
+
+/* Listes de deuxième niveau */
+
+div.slide > ul > li > ul > li { /* Item de liste */
+    
+	color: orange ; /* couleur de la puce */
+        background: inherit ; /* couleur de fond de l'item de liste*/
+	list-style-type: disc ; /* type de puce */
+	list-style-image: none ; /* image de la puce*/
+	
+}
+div.slide > ul > li > ul > li > span { /* Texte de l'item de liste */
+	
+	color: black ; /* couleur du texte */
+	background: inherit ; /* couleur de fond du texte */
+	font-size: inherit ; /* taille de la police de caractères */
+	font-family: inherit ; /* choix de la police de caractères */
+	font-weight: inherit ; /* choix de la graisse de la police de caractères*/	
+}
+
+/* Listes de troisième niveau */
+
+div.slide > ul > li > ul > li > ul > li { /* Item de liste */
+    
+	color: green ; /* couleur de la puce */
+        background: inherit ; /* couleur de fond de l'item de liste*/
+	list-style-type: circle ; /* type de puce */
+	list-style-image: none ; /* image de la puce*/
+	
+}
+div.slide > ul > li > ul > li > ul > li > span { /* Texte de l'item de liste */
+	
+	color: black ; /* couleur du texte */
+	background: inherit ; /* couleur de fond du texte */
+	font-size: inherit ; /* taille de la police de caractères */
+	font-family: inherit ; /* choix de la police de caractères */
+	font-weight: inherit ; /* choix de la graisse de la police de caractères*/	
+}
+
+/* Listes de quatrième niveau */
+
+div.slide > ul > li > ul > li > ul > li > ul > li { /* Item de liste */
+    
+	color: orange ; /* couleur de la puce */
+        background: inherit ; /* couleur de fond de l'item de liste*/
+	list-style-type: lower-alpha ; /* type de puce */
+	list-style-image: none ; /* image de la puce*/
+	
+}
+div.slide > ul > li > ul > li > ul > li > ul > li > span { /* Texte de l'item de liste */
+	
+	color: black ; /* couleur du texte */
+	background: inherit ; /* couleur de fond du texte */
+	font-size: inherit ; /* taille de la police de caractères */
+	font-family: inherit ; /* choix de la police de caractères */
+	font-weight: inherit ; /* choix de la graisse de la police de caractères*/	
+}
+
+/* ----------------------------------------------------   Fin des listes    ----------------------------------------------------------------*/
+
+/* ----------------------------------------------------   Page  ----------------------------------------------------------------------------*/
+
+body {
+	
+	font-family: inherit ; /* Police de caractères de la page */
+	font_size: inherit ;   /* Taile de la police de caractères */
+	font-weight: inherit ; /* Graisse de la police de caractères */
+}
+
+.slide {
+	
+	/* background-size: cover; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-image: url('image.jpg');} */ /* Image en fond de page */
+	background: #FFFFEB ;  /* Couleur de fond de la page */
+}
+
+pre.code_xml {
+	
+	color: inherit ; /* Couleur du code XML */
+}
+pre {
+	background: inherit ;  /* Couleur de fond des textes pré-formattés */
+}
+tt {    /* Couleur et police de carcatères des textes façon télétype */
+	color: inherit ;
+	font-family: inherit ;
+}
+
+.elsommaire {
+	
+	color: inherit ; /* Couleur des éléments de liste de niveau 1 du sommaire */
+}
+.elsommaire:hover {
+	
+	color: inherit ; /* Couleur de survol des éléments de liste de niveau 1 du sommaire */
+}
+.elsommaire2 {
+	
+	color: inherit ; /* Couleur des éléments de liste de niveau 2 du sommaire */
+
+}
+.elsommaire2:hover {
+	
+	color: inherit ; /* Couleur de survol des éléments de liste de niveau 2 du sommaire */
+	
+}
+.linkitem {
+	
+	color: inherit ; /* Couleur des liens de la classe linkitem ( items de liste de niveau 2 du sommaire ) */
+
+}
+.linkitem:hover {
+	
+	color: inherit ; /* Couleur de survol des liens de la classe linkitem ( items de liste de niveau 2 du sommaire ) */
+
+}
+
+ul {
+	
+	background : inherit ; /* Couleur de fond des listes */
+	color : #963232 ;      /* Couleur du texte des listes */
+	
+}
+
+p {
+	
+	background : inherit ; /* Couleur de fond des paragraphes */
+	color :  #963232;      /* Couleur du texte des paragraphes */
+	
+}
+	
+.spanli {
+	
+	background : inherit ; /* Couleur de fond des items de liste */
+	color : inherit ;      /* Couleur du texte des  items de liste */
+	
+}
+		
+td.logogauche {
+	
+	background : inherit ; /* Couleur de fond du logo gauche*/
+	color :  #963232;      /* Couleur du logo gauche */
+	
+}
+
+td.logodroit {
+	
+	background : inherit ; /* Couleur de fond du logo droit*/
+	color :  #963232;      /* Couleur du logo droit */	
+}
+
+tt.slidenumber {
+	
+	background : inherit ; /* Couleur du numéro de slide */
+	color : #963232 ;      /* Couleur du numéro de slide */	
+}
+		
+tt.piedgauche {
+	
+	background : inherit ; /* Couleur de fond du pied de page gauche */
+	color : #963232;      /* Couleur du pied de page gauche */
+	
+}
+
+tt.pieddroit {
+	
+	background : inherit ; /* Couleur de fond du pied de page droit */
+	color : #963232  ;    /* Couleur du pied de page droit */
+	
+}
+/* ----------------------------------------------------   Fin de Page  ----------------------------------------------------------------------------*/	
+
+/* ----------------------------------------------------   Page  Titre  ----------------------------------------------------------------------------*/
+
+.pagetitre {
+	
+	background : inherit ; /* Couleur de fond de la page de titre */
+	color : #963232 ;      /* Couleur du texte de la page de titre */
+	/* background-image: url('image.jpg') ;*/ /* Imade de fond de la page de titre */
+	font-family: inherit ; /* Police de caractères de la page de titre */
+	
+}
+
+/* ----------------------------------------------------   Fin Page  Titre  -------------------------------------------------------------------------*/
+
+/* ----------------------------------------------------   Titres  ----------------------------------------------------------------------------------*/
+
+td.soixante {
+	
+	background : inherit ; /* Couleur de fond des cases du titre des slides  */
+}
+
+slide_title  { /* Couleur, couleur de fond et police de caractères des titres de slide */
+	
+	color : inherit ;
+	background : inherit ;
+	/* background-image: url(image.jpg) ; */
+	font-familiy : inherit;
+}
+
+.titrepartie { /* Couleur, couleur de fond et police de caractères des titres de partie */
+	
+	color :  #963232 ;
+	background : inherit ;
+	/* background-image: url(image.jpg) ; */
+	font-familiy : inherit;
+}
+
+.titresommaire { /* Couleur, couleur de fond et police de caractères du titres du sommaire */
+	
+	color : #963232 ;
+	background : inherit ;
+	/* background-image: url(image.jpg) ; */
+	font-familiy : inherit;
+	
+}
+
+/* ----------------------------------------------------   Fin Titres  -------------------------------------------------------------------------------*/
+
+/* ----------------------------------------------------   Environnemments d'image ou de vidéo  ------------------------------------------------------*/
+
+.titreimage { /* Couleur, couleur de fond et police de caractères des titres d'image ou de vidéo */
+	
+	background-color: #E0E0FF ;
+	font-family: inherit ;
+	color: inherit ;
+	
+}
+	
+.envimage { /* Couleur et image de fond des environnements d'image ou de vidéo */
+	
+	background: #EBFFEB ;
+	/* background-image: url(image.jpg)</xsl:if> */
+	
+}
+
+.legende { /* Couleur et police de caractères des légendes d'images ou de vidéo */
+	
+	font-family: inherit ;
+	color: inherit ;
+	
+}
+
+
+
+/* -----------------------------------------------    Fin Environnemments d'image ou de vidéo  ------------------------------------------------------*/
+
+/* ---------------------------------------------------------------------   Entêtes de tableau  ------------------------------------------------------*/
+
+
+th { /* Couleur, couleur ou image de fond et police de caractères des entêtes de tableau */
+	
+	background-color:  #FFF0E0 ;
+	/* background-image: url(image.jpg) ; */
+	font-family: inherit ;
+	color: inherit ;
+	
+}
+	
+
+
+/* ------------------------------------------------------------------ Fin Entêtes de tableau  -------------------------------------------------------*/
+
+
+/* ---------------------------------------------------------------------   Cellules de tableau  ------------------------------------------------------*/
+
+
+.tableau1 { /* Couleur, couleur ou image de fond et police de caractères des cellules de tableau */
+	
+	background-color: #FFFAE0 ;
+	/* background-image: url(image.jpg) ; */
+	font-family: inherit ;
+	color: inherit ;
+	
+}
+	
+.tableau2 { /* Couleur, couleur ou image de fond et police de caractères des cellules de tableau */
+	
+	background-color:  #FFFAE0 ;
+	/* background-image: url(image.jpg) ; */
+	font-family: inherit ;
+	color: inherit ;
+	
+}
+
+/* ------------------------------------------------------------------ Fin Cellules de tableau  -------------------------------------------------------*/

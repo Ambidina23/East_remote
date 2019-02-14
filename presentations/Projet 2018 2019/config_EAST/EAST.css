@@ -111,11 +111,11 @@ h3.shadowinc[smil="active"] {
 
 .highinc  li[smil="active"] {
   visibility: visible;
-  color:red !important;
+  color:yellow !important;
 }
 .highinc  li[smil="active"] > span:first-child {
   opacity:1;
-  color: red !important;
+  color: yellow !important;
 }
 
 .highinc  li[smil="idle"] {
@@ -192,7 +192,7 @@ h3.highinc[smil="done"] {
 h3.highinc[smil="active"] {
   visibility: visible;
   opacity:1;
-  color: red;
+  color: yellow;
 }
 
 /* Plus sign manadgment */
