@@ -7,7 +7,6 @@
 #haut{
 	-webkit-transform: scaleY(-1);
  	transform: scaleY(-1);
-
 }
 
 #bas{
@@ -24,14 +23,12 @@
 
 }
 
-#zoom{
-
+#clic{
 
 }
 
-#dezoom{
-
-
+#zoom, #dezoom, #plein, #nav{
+	opacity: 0.5;
 }
 
 #telecommande{
@@ -39,7 +36,6 @@
 	display: flex;
 	flex-flow: column wrap;
 	justify-content: center;
-
 	margin-left: auto;
   	margin-right: auto;
   	align-items: center;
