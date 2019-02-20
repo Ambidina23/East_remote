@@ -94,14 +94,14 @@ io.sockets.on('connection', function (socket) {
     // Quand le serveur recoit le message plein, on simule la touche F
     socket.on('plein',function(data){
         if(data.key === mdp) {
-            robot.keyTap("F");  
+            robot.keyTap("f");  
         }     
     })
 
     // Quand le serveur recoit le message nav, on simule la touche B
     socket.on('nav',function(data){
         if(data.key === mdp) {
-            robot.keyTap("B");  
+            robot.keyTap("b");  
         }     
     })
 
